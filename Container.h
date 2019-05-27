@@ -7,6 +7,8 @@ struct Node {
 	T data;
 	Node * next;
 	Node * prev;
+
+	Node(T d) : data(d), next(nullptr), prev(nullptr) {}
 };
 
 template<class T>
@@ -16,9 +18,9 @@ public:
 
 	void push_back(T item) {
 		size++;
-		Node<T> * foo = new Node<T>; // C2280
-		foo->next = nullptr;
-		foo->data = item; // C2280
+		Node<T> * foo = &Node<T>(item); // C2280
+		// foo->next = nullptr;
+		// foo->data = item; // C2280
 
 		if (head) {
 			foo->prev = tail;

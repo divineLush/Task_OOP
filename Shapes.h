@@ -8,6 +8,8 @@
 #include "Base.h"
 #include "Container.h"
 
+static size_t k;
+
 class Shape : public Printable {
 public:
 	virtual std::string get_info() const = 0;
@@ -19,8 +21,10 @@ public:
 protected:
 	Shape() { k++; }
 
-private:
-	static size_t k;
+	/*
+	private:
+	static size_t k
+	*/
 };
 
 class Point : public Shape, public Named {
@@ -29,7 +33,7 @@ public:
 
 	Point(Point const& foo) : Named("Point"), x(foo.x), y(foo.y) {}
 
-	std::string get_info() const {
+	virtual std::string get_info() const {
 		std::stringstream stream;
 		stream << get_name() << "\nCoord: (" << x << ", " << y << ")\n";
 		return stream.str();
@@ -60,7 +64,7 @@ class Circle : public Shape, public Named {
 public:
 	Circle(Point const & p, double r) : Named("Circle"), center(p), radius(r > 0 ? r : 0){}
 
-	std::string get_info() const {
+	virtual std::string get_info() const {
 		std::stringstream stream;
 		stream << get_name() << "\nCenter coord: (" << center.get_x() << ", " << center.get_y() << ")\nR=" << radius << "\n";
 		return stream.str();
@@ -86,7 +90,7 @@ public:
 		a(a_.get_x() < c_.get_x() ? a_ : Point(0, 0)), 
 		c(a_.get_y() > c_.get_y() ? c_ : Point(0, 0)) {}
 
-	std::string get_info() const {
+	virtual std::string get_info() const {
 		std::stringstream stream;
 		stream << get_name() << "\nCoord s: a = (" << a.get_x() << ", " << a.get_y() << "), c = (" << c.get_x() << ", " << c.get_y() << ")\n";
 		stream << "Perimeter = " << calculate_perimeter() << "\n";
@@ -118,7 +122,7 @@ public:
 		a(a_.get_x() < c_.get_x() ? a_ : Point(0, 0)),
 		c(a_.get_y() > c_.get_y() ? c_ : Point(0, 0)) {}
 
-	std::string get_info() const {
+	virtual std::string get_info() const {
 		std::stringstream stream;
 		stream << get_name() << "\nCoord s: a = (" << a.get_x() << ", " << a.get_y() <<
 			"), b = (" << (a.get_x() + c.get_x()) / 2 + (a.get_y() - c.get_y()) / 2 << ", " << (a.get_y() + c.get_y()) / 2 - (a.get_x() - c.get_x()) / 2 <<
@@ -156,7 +160,7 @@ public:
 		points.push_back(p);
 	}
 
-	std::string get_info() {
+	virtual std::string get_info() const {
 		std::stringstream stream;
 		stream << get_name() << '\n';
 		if (points.is_empty()) {
@@ -173,7 +177,7 @@ public:
 		return stream.str();
 	}
 
-	double calculate_length() {
+	double calculate_length() const {
 		double length = 0;
 		for (size_t i = 1; i < points.length(); i++) {
 			Point const & foo1 = points.get(i-1);
@@ -183,9 +187,11 @@ public:
 		return length;
 	}
 
+	/*
 	friend std::ostream& operator << (std::ostream & s, Polyline const & a) {
 		return s << a.get_info();
 	}
+	*/
 
 private:
 	Container<Point> points;
@@ -197,7 +203,7 @@ public:
 
 	Polygon(Container<Point> const & p) : Named("Polygon"), points(p) {}
 
-	std::string get_info() {
+	virtual std::string get_info() const {
 		std::stringstream stream;
 		stream << get_name() << '\n';
 		if (points.is_empty()) {
@@ -214,7 +220,7 @@ public:
 		return stream.str();
 	}
 
-	double calculate_length() {
+	double calculate_length() const {
 		double length = 0;
 		for (size_t i = 1; i < points.length(); i++) {
 			Point const & foo1 = points.get(i - 1);
@@ -225,7 +231,7 @@ public:
 		return length;
 	}
 
-	friend std::ostream& operator << (std::ostream & s, Polygon const & a) {
+	friend std::ostream& operator << (std::ostream & s, Polygon & a) {
 		return s << a.get_info();
 	}
 
