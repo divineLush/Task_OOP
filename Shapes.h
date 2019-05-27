@@ -39,12 +39,12 @@ public:
 
 	double get_y() const { return y; }
 
-	double calculate_dist( double x_, double y_ ) const {
-		return sqrt( pow( x_ - x , 2 ) + pow( y_ - y , 2 ) );
+	double calculate_dist(double x_, double y_) const {
+		return sqrt(pow(x_ - x , 2) + pow(y_ - y , 2));
 	}
 
-	double calculate_dist( Point const& foo  ) const {
-		return sqrt( pow( foo.get_x() - x, 2 ) + pow( foo.get_y() - y, 2 ) );
+	double calculate_dist(Point const& foo) const {
+		return sqrt(pow(foo.get_x() - x, 2) + pow(foo.get_y() - y, 2));
 	}
 
 	friend std::ostream& operator << (std::ostream & s, Point const & a) {

@@ -18,7 +18,7 @@ public:
 
 	void push_back(T item) {
 		size++;
-		Node<T> * foo = &Node<T>(item); // C2280
+		Node<T> * foo = new Node<T>(item); // C2280
 		// foo->next = nullptr;
 		// foo->data = item; // C2280
 
@@ -48,9 +48,8 @@ public:
 
 	void push_front(T item) {
 		size++;
-		Node<T> * foo = new Node<T>;
+		Node<T> * foo = new Node<T>(item); 
 		foo->next = head;
-		foo->data = item;
 
 		if (head) {
 			foo->next = head;
