@@ -43,7 +43,7 @@ public:
 		return sqrt(pow(x_ - x , 2) + pow(y_ - y , 2));
 	}
 
-	double calculate_dist(Point const& foo) const {
+	double calculate_dist(Point const & foo) const {
 		return sqrt(pow(foo.get_x() - x, 2) + pow(foo.get_y() - y, 2));
 	}
 
@@ -62,7 +62,10 @@ public:
 
 	virtual std::string get_info() const {
 		std::stringstream stream;
-		stream << get_name() << "\nCenter coord: (" << center.get_x() << ", " << center.get_y() << ")\nR=" << radius << "\n";
+		stream << get_name() << "\nCenter coord: (" << center.get_x() << ", "
+			<< center.get_y() << ")\nR = " << radius << "\n"
+			<< "Area = " << calculate_area() << "\n"
+			<< "Length = " << calculate_length() << "\n";
 		return stream.str();
 	}
 
@@ -88,7 +91,7 @@ public:
 
 	virtual std::string get_info() const {
 		std::stringstream stream;
-		stream << get_name() << "\nCoord s: a = (" << a.get_x() << ", " << a.get_y() << "), c = (" << c.get_x() << ", " << c.get_y() << ")\n";
+		stream << get_name() << "\nCoord: a = (" << a.get_x() << ", " << a.get_y() << "), c = (" << c.get_x() << ", " << c.get_y() << ")\n";
 		stream << "Perimeter = " << calculate_perimeter() << "\n";
 		stream << "Area = " << calculate_area() << "\n";
 		return stream.str();
@@ -120,12 +123,12 @@ public:
 
 	virtual std::string get_info() const {
 		std::stringstream stream;
-		stream << get_name() << "\nCoord s: a = (" << a.get_x() << ", " << a.get_y() <<
+		stream << get_name() << "\nCoord: a = (" << a.get_x() << ", " << a.get_y() <<
 			"), b = (" << (a.get_x() + c.get_x()) / 2 + (a.get_y() - c.get_y()) / 2 << ", " << (a.get_y() + c.get_y()) / 2 - (a.get_x() - c.get_x()) / 2 <<
 			"), c = (" << c.get_x() << ", " << c.get_y() <<
 			"), d = (" << (a.get_x() + c.get_x()) / 2 - (a.get_y() - c.get_y()) / 2 << ", " << (a.get_y() + c.get_y()) / 2 + (a.get_x() - c.get_x()) / 2 << ")\n";
-		stream << "Perimeter = " << calculate_perimeter();
-		stream << "Area = " << calculate_area();
+		stream << "Perimeter = " << calculate_perimeter() << "\n";
+		stream << "Area = " << calculate_area() << "\n";
 		return stream.str();
  	}
 
@@ -158,17 +161,17 @@ public:
 
 	virtual std::string get_info() const {
 		std::stringstream stream;
-		stream << get_name() << '\n';
+		stream << get_name() << "\n";
 		if (points.is_empty()) {
 			stream << "No points";
 		}
 		else {
 			stream << "Points: ";
 			for (size_t i = 0; i < points.length(); i++) {
-				stream << "(" << points.get(i).get_x() << ", " << points.get(i).get_y() << "), ";
+				stream << "(" << points.get(i).get_x() << ", " 
+					<< points.get(i).get_y() << "), ";
 			}
-			stream << "\n";
-			stream << "Length = " << calculate_length();
+			stream << "\n" << "Length = " << calculate_length() << "\n";
 		}
 		return stream.str();
 	}
@@ -183,11 +186,9 @@ public:
 		return length;
 	}
 
-	/*
 	friend std::ostream& operator << (std::ostream & s, Polyline const & a) {
 		return s << a.get_info();
 	}
-	*/
 
 private:
 	Container<Point> points;
@@ -201,17 +202,17 @@ public:
 
 	virtual std::string get_info() const {
 		std::stringstream stream;
-		stream << get_name() << '\n';
+		stream << get_name() << "\n";
 		if (points.is_empty()) {
-			stream << "No points";
+			stream << "No points" << "\n";
 		}
 		else {
 			stream << "Points: ";
 			for (size_t i = 0; i < points.length(); i++) {
-				stream << "(" << points.get(i).get_x() << ", " << points.get(i).get_y() << "), ";
+				stream << "(" << points.get(i).get_x() << ", " 
+					<< points.get(i).get_y() << "), ";
 			}
-			stream << "\n";
-			stream << "Length = " << calculate_length();
+			stream << "\n" << "Length = " << calculate_length() << "\n";
 		}
 		return stream.str();
 	}

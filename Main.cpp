@@ -9,13 +9,12 @@ int main() {
 	}
 	
 	for (size_t i = 0; i < 20; i++) {
-		std::cout << shapes.get(i)->get_info();
-		std::cout << '\n';
+		std::cout << shapes.get(i)->get_info() << "\n";
 	}
 
-	std::cout << Shape::get_count() << '\n';
+	std::cout << "Number of figures = " << Shape::get_count() << "\n";
 	shapes.~Container();
-	std::cout << shapes.length();
+	std::cout << "Number of figures = " << shapes.length();
 	getchar();
 	return 0;
 }
