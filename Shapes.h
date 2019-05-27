@@ -8,8 +8,6 @@
 #include "Base.h"
 #include "Container.h"
 
-static size_t k;
-
 class Shape : public Printable {
 public:
 	virtual std::string get_info() const = 0;
@@ -21,10 +19,8 @@ public:
 protected:
 	Shape() { k++; }
 
-	/*
-	private:
-	static size_t k
-	*/
+private:
+	static size_t k;
 };
 
 class Point : public Shape, public Named {

@@ -1,7 +1,8 @@
 #include "factory.h"
 
+size_t Shape::k = 0;
+
 int main() {
-	k = 0;
 	Container<Shape *> shapes = Container<Shape *>();
 	for (size_t i = 0; i < 20; i++) {
 		shapes.push_back(generate_shape(rand() % 4));
