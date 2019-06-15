@@ -13,7 +13,6 @@ int main() {
 	}
 
 	std::cout << "Number of figures = " << Shape::get_count() << "\n";
-	shapes.~Container();
 	std::cout << "Number of figures = " << shapes.length();
 	getchar();
 	return 0;
