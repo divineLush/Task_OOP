@@ -5,9 +5,6 @@
 class Printable {
 public:
 	virtual std::string get_info() const = 0;
-
-protected:
-	Printable() {}
 };
 
 class Named : public Printable {
